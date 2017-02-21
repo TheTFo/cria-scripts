@@ -1,13 +1,10 @@
 var glob = require("glob")
 var path = require('path');
-var compileLess = require('./compileLess');
+var compileLess = require('./compile-less');
 
-if (process.argv.length < 3) {
-    console.log('Usage: node buildCss.js src dest');
-    return;
-}
+const defaultSrc = 'src';
 
-var src = path.join(process.cwd(), process.argv[2]);
+var src = process.argv.length > 2 ? path.join(process.cwd(), process.argv[2]) : defaultSrc;
 var dest = process.argv.length > 3 ? path.join(process.cwd(), process.argv[3]) : src; 
 
 const globOptions = {

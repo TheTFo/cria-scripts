@@ -1,14 +1,13 @@
 var fs = require('fs');
 var path = require('path');
 var watch = require('watch');
-var extractI18n = require('./extractI18n');
+var compileLess = require('./compile-less');
 
 var watchRoot = path.join(process.cwd(), "src");
 var watchOptions = {
     interval: 0.2,
     filter: (f) => {
-        return fs.lstatSync(f).isDirectory() || 
-            (f.substr(f.length - 3) === '.js' && f.substr(f.length - 7) !== '.svg.js' && f.substr(f.length - 8) !== '.test.js');
+        return fs.lstatSync(f).isDirectory() || f.substr(f.length - 5) === '.less';
     }
 }
 
@@ -17,11 +16,11 @@ watch.watchTree(watchRoot, watchOptions, (f, curr, prev) => {
         // Finished walking the tree
     } else if (prev === null) {
         // f is a new file
-        extractI18n();
+        compileLess(f, f.substr(0, f.length - 4) + 'css');
     } else if (curr.nlink === 0) {
         // f was removed
     } else {
         // f is modified
-        extractI18n();
+        compileLess(f, f.substr(0, f.length - 4) + 'css');
     }
 });

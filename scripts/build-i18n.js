@@ -13,7 +13,7 @@ const parserOptions = {
     defaultValue: '_NOT_TRANSLATED_'
 };
 
-function extractI18n() {
+function buildI18n() {
     var parser = new Parser(parserOptions);
     glob(srcFiles, (er, files) => {
         if (files && files.length) {
@@ -44,6 +44,6 @@ function extractI18n() {
     });
 }
 
-extractI18n();
+buildI18n();
 
-module.exports = extractI18n;
+module.exports = buildI18n;

@@ -17,11 +17,18 @@
   },
   "homepage": "https://github.com/thetfo/cria-scripts#readme",
   "dependencies": {
+    "async": "^2.1.5",
     "glob": "^7.1.1",
     "i18next-scanner": "^1.5.1",
+    "less": "^2.7.2",
     "mkdirp": "^0.5.1",
     "npm-run-all": "^4.0.1",
-    "redux-immutable-state-invariant": "^1.2.4",
     "watch": "^1.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.16.0"
+  },
+  "bin": {
+    "cria-scripts": "./bin/cria-scripts.js"
   }
 }

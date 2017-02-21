@@ -2,10 +2,10 @@ var glob = require("glob")
 var fs = require('fs');
 var mkdirp = require('mkdirp');
 var path = require('path');
-var convertSvgToJs = require('./convertSvgToJs')
+var convertSvgToJs = require('./svg-to-js');
 
 if (process.argv.length < 3) {
-    console.log('Usage: node svgToJs.js src dest');
+    console.log('Usage: node build-icons.js src [dest]');
     return;
 }
 
