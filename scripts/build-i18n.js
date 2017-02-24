@@ -25,7 +25,7 @@ function buildI18n() {
                 var parserOutput = parser.get({ sort: true });
 
                 parserOptions.lngs.forEach(lang => {
-                    var destFile = path.join(process.cwd(), 'src', 'i18n', 'lang', lang + '.json');
+                    var destFile = path.join(process.cwd(), 'public', 'i18n', 'lang', lang + '.json');
                     mkdirp(path.dirname(destFile), (err) => {
                         if (err) {
                             throw err;
