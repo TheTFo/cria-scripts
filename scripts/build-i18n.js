@@ -5,11 +5,13 @@ var mkdirp = require('mkdirp');
 var Parser = require('i18next-scanner').Parser;
 var async = require('async');
 
+var i18nConfig = require(path.join(process.cwd(), 'package.json')).i18n;
+
 const srcFiles = 'src/**/!(*.test|*.svg).js';
-const parserOptions = {
-    lngs: ['en-US', 'en-GB', 'es-MX'],
+const parserOptions = i18nConfig ? i18nConfig : {
+    lngs: ['en-US'],
     removeUnusedKeys: true,
-    defaultNs: 'cria',
+    defaultNs: 'translations',
     defaultValue: '_NOT_TRANSLATED_'
 };
 
@@ -25,7 +27,7 @@ function buildI18n() {
                 var parserOutput = parser.get({ sort: true });
 
                 parserOptions.lngs.forEach(lang => {
-                    var destFile = path.join(process.cwd(), 'src', 'i18n', 'lang', lang + '.json');
+                    var destFile = path.join(process.cwd(), 'public', 'i18n', 'lang', lang + '.json');
                     mkdirp(path.dirname(destFile), (err) => {
                         if (err) {
                             throw err;
