@@ -27,17 +27,19 @@ function buildI18n() {
                 var parserOutput = parser.get({ sort: true });
 
                 parserOptions.lngs.forEach(lang => {
-                    var destFile = path.join(process.cwd(), 'public', 'i18n', 'lang', lang + '.json');
-                    mkdirp(path.dirname(destFile), (err) => {
-                        if (err) {
-                            throw err;
-                        }
-
-                        var output = JSON.stringify(parserOutput[lang], null, 4);
-                        fs.writeFile(destFile, output, { flag: 'w' }, (err) => {
+                    parserOptions.ns.forEach(ns => {
+                        var destFile = path.join(process.cwd(), 'public', 'i18n', 'lang', lang, ns + '.json');
+                        mkdirp(path.dirname(destFile), (err) => {
                             if (err) {
                                 throw err;
                             }
+
+                            var output = JSON.stringify(parserOutput[lang][ns], null, 4);
+                            fs.writeFile(destFile, output, { flag: 'w' }, (err) => {
+                                if (err) {
+                                    throw err;
+                                }
+                            });
                         });
                     });
                 });
