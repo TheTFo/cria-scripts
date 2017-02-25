@@ -34,11 +34,22 @@ function buildI18n() {
                                 throw err;
                             }
 
-                            var output = JSON.stringify(parserOutput[lang][ns], null, 4);
-                            fs.writeFile(destFile, output, { flag: 'w' }, (err) => {
-                                if (err) {
-                                    throw err;
+                            fs.readFile(destFile, (err, existingBuffer) => {
+                                var output = parserOutput[lang][ns];
+                                if (!err) {
+                                    var existing = JSON.parse(existingBuffer);
+                                    Object.keys(output).forEach((k) => {
+                                        if (existing[k]) {
+                                            output[k] = existing[k];
+                                        }
+                                    });
                                 }
+
+                                fs.writeFile(destFile, JSON.stringify(output, null, 4), { flag: 'w' }, (err) => {
+                                    if (err) {
+                                        throw err;
+                                    }
+                                });
                             });
                         });
                     });
