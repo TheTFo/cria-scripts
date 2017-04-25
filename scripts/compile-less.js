@@ -30,6 +30,7 @@ module.exports = function compileLess(srcFile, destFile) {
                 // output.imports = array of string filenames of the imports referenced
             },
             (error) => {
+                console.error(`Error compiling ${srcFile}: ${error.message}`);
             });
     });
 }
