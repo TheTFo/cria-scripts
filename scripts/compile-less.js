@@ -3,14 +3,12 @@ var path = require('path');
 var mkdirp = require('mkdirp');
 var less = require('less');
 
-const lessOptions = {};
-
 module.exports = function compileLess(srcFile, destFile) {
     fs.readFile(srcFile, 'utf8', (err, data) => {
         if (err) {
             return console.log(err);
         }
-        less.render(data, lessOptions)
+        less.render(data, , { filename: path.resolve(srcFile) })
             .then((output) => {
                 mkdirp(path.dirname(destFile), (err) => {
                     if (err) {
