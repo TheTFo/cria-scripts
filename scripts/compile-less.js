@@ -8,7 +8,7 @@ module.exports = function compileLess(srcFile, destFile) {
         if (err) {
             return console.log(err);
         }
-        less.render(data, , { filename: path.resolve(srcFile) })
+        less.render(data, { filename: path.resolve(srcFile) })
             .then((output) => {
                 mkdirp(path.dirname(destFile), (err) => {
                     if (err) {
