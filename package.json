@@ -1,6 +1,6 @@
 {
   "name": "cria-scripts",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Scripts for Cria bootstrapped projects",
   "main": "index.js",
   "scripts": {
