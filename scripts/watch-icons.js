@@ -3,7 +3,12 @@ var path = require('path');
 var watch = require('watch');
 var convertSvgToJs = require('./svg-to-js');
 
-var watchRoot = path.join(process.cwd(), "src/components/common/Icon/assets");
+if (process.argv.length < 3) {
+    console.log('Usage: node watch-icons.js directory');
+    return;
+}
+
+var watchRoot = path.join(process.cwd(), process.argv[2]);
 var watchOptions = {
     interval: 0.2,
     filter: (f) => {
